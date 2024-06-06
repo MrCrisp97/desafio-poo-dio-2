@@ -2,6 +2,7 @@ package br.com.dio.desafio.dominio;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -53,6 +54,31 @@ public class Bootcamp {
 
     public void setConteudos(Set<Conteudo> conteudos) {
         this.conteudos = conteudos;
+    }
+
+    public int totalXpCurso() {
+        Iterator<Conteudo> iterator = this.conteudos.iterator();
+        int soma = 0;
+        while(iterator.hasNext()){
+            double next = iterator.next().calcularXp();
+            soma += next;
+        }
+        return soma;
+    }
+
+    public void porcentagemConclusao(Dev dev){
+        double porcentagemConclusao=0;
+        int xpTotal = totalXpCurso();
+        double soma = dev.calcularTotalXp();
+        porcentagemConclusao = soma/xpTotal;
+
+        if (porcentagemConclusao == 1d){
+            System.out.println("PARABÉNS! Você concluiu o curso!");
+            System.out.println("Você já pode baixar seu certificado");
+        }
+        else
+            System.out.println("Você já concluiu " + porcentagemConclusao*100 + "% do curso");
+
     }
 
     @Override
