@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Objects;
+import java.util.Scanner;
 import java.util.Set;
 
 public class Bootcamp {
@@ -14,7 +15,7 @@ public class Bootcamp {
     private final LocalDate dataFinal = dataInicial.plusDays(45);
     private Set<Dev> devsInscritos = new HashSet<>();
     private Set<Conteudo> conteudos = new LinkedHashSet<>();
-
+    
 
     public String getNome() {
         return nome;
@@ -75,10 +76,27 @@ public class Bootcamp {
         if (porcentagemConclusao == 1d){
             System.out.println("PARABÉNS! Você concluiu o curso!");
             System.out.println("Você já pode baixar seu certificado");
+            darFeedback(dev);
         }
-        else
+        else{
             System.out.println("Você já concluiu " + porcentagemConclusao*100 + "% do curso");
+        }
+    }
 
+    public void darFeedback(Dev dev){
+        @SuppressWarnings("resource")
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(dev.getNome() + ", você gostaria de deixar seu feedback do curso? S/N");
+        String opcao = scanner.nextLine();
+        if (opcao.equalsIgnoreCase("S")){
+            System.out.println("Descreva o que você achou do curso");
+            String opiniao = scanner.nextLine();
+            System.out.println("Obrigado por deixar sua opinião, ela irá nos ajudar a melhorar cada vez mais. Confira ela abaixo:");
+            System.out.println(dev.getNome());
+            System.out.println(opiniao);
+            System.out.println("Obrigado por estudar conosco");
+        } else
+            System.out.println("Obrigado por estudar conosco");
     }
 
     @Override
